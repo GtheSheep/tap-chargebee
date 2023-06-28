@@ -53,10 +53,11 @@ class TapChargebee(Tap):
             A list of discovered streams.
         """
         return [
+            streams.BusinessEntitiesStream(self),
+            streams.CouponsStream(self),
             streams.CustomerStream(self),
             streams.EventsStream(self),
             streams.SubscriptionsStream(self),
-            streams.TransactionStream(self),
         ]
 
 

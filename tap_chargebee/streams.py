@@ -131,7 +131,7 @@ class TransactionStream(ChargebeeStream):
         th.Property("gateway_account_id", th.StringType),
         th.Property("payment_source_id", th.StringType),
         th.Property("payment_method", th.StringType),
-        th.Property("gateway", th.IntegerType),
+        th.Property("gateway", th.StringType),
         th.Property("type", th.StringType),
         th.Property("date", th.IntegerType),
         th.Property("settled_at", th.IntegerType),
@@ -151,4 +151,60 @@ class TransactionStream(ChargebeeStream):
         th.Property("linked_refunds", th.ArrayType(th.ObjectType())),
         th.Property("business_entity_id", th.StringType),
         th.Property("payment_method_details", th.ObjectType()),
+    ).to_dict()
+
+
+class BusinessEntitiesStream(ChargebeeStream):
+
+    name = "business_entities"
+    path = "/business_entities"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].business_entity"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("created_at", th.IntegerType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("timezone", th.StringType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("object", th.StringType),
+    ).to_dict()
+
+
+class CouponsStream(ChargebeeStream):
+
+    name = "coupons"
+    path = "/coupons"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].coupon"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("invoice_name", th.StringType),
+        th.Property("discount_type", th.IntegerType),
+        th.Property("discount_percentage", th.NumberType),
+        th.Property("discount_amount", th.NumberType),
+        th.Property("currency_code", th.StringType),
+        th.Property("duration_type", th.StringType),
+        th.Property("duration_month", th.IntegerType),
+        th.Property("max_redemptions", th.IntegerType),
+        th.Property("status", th.StringType),
+        th.Property("apply_discount_on", th.StringType),
+        th.Property("apply_on", th.StringType),
+        th.Property("plan_constraint", th.StringType),
+        th.Property("addon_constraint", th.StringType),
+        th.Property("created_at", th.DateTimeType),
+        th.Property("archived_at", th.DateTimeType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("object", th.StringType),
+        th.Property("redemptions", th.IntegerType),
+        th.Property("plan_ids", th.ArrayType(th.StringType)),
+        th.Property("addon_ids", th.ArrayType(th.StringType)),
+        th.Property("invoice_notes", th.StringType),
+        th.Property("meta_data", th.ObjectType()),
     ).to_dict()
