@@ -115,3 +115,40 @@ class CustomerStream(ChargebeeStream):
         th.Property("tax_providers_fields", th.ArrayType(th.ObjectType())),
         th.Property("cf_is_migrated", th.StringType),
     ).to_dict()
+
+
+class TransactionStream(ChargebeeStream):
+
+    name = "transactions"
+    path = "/transactions"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    records_jsonpath = "$.list[*].transaction"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("subscription_id", th.StringType),
+        th.Property("gateway_account_id", th.StringType),
+        th.Property("payment_source_id", th.StringType),
+        th.Property("payment_method", th.StringType),
+        th.Property("gateway", th.IntegerType),
+        th.Property("type", th.StringType),
+        th.Property("date", th.IntegerType),
+        th.Property("settled_at", th.IntegerType),
+        th.Property("exchange_rate", th.NumberType),
+        th.Property("amount", th.IntegerType),
+        th.Property("id_at_gateway", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("object", th.StringType),
+        th.Property("masked_card_number", th.StringType),
+        th.Property("currency_code", th.StringType),
+        th.Property("base_currency_code", th.StringType),
+        th.Property("amount_unused", th.NumberType),
+        th.Property("linked_invoices", th.ArrayType(th.ObjectType())),
+        th.Property("linked_refunds", th.ArrayType(th.ObjectType())),
+        th.Property("business_entity_id", th.StringType),
+        th.Property("payment_method_details", th.ObjectType()),
+    ).to_dict()
