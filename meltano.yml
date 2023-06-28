@@ -1,0 +1,33 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: "tap-chargebee"
+default_environment: test
+environments:
+- name: test
+plugins:
+  extractors:
+  - name: "tap-chargebee"
+    namespace: "tap_chargebee"
+    pip_url: -e .
+    capabilities:
+    - state
+    - catalog
+    - discover
+    - about
+    - stream-maps
+    config:
+      start_date: '2010-01-01T00:00:00Z'
+      site_id: ""
+      api_key: ""
+      limit: 10
+    settings:
+    - name: site_id
+    - name: api_key
+      kind: password
+    - name: start_date
+      value: '2010-01-01T00:00:00Z'
+    - name: limit
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
