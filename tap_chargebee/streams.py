@@ -208,3 +208,108 @@ class CouponsStream(ChargebeeStream):
         th.Property("invoice_notes", th.StringType),
         th.Property("meta_data", th.ObjectType()),
     ).to_dict()
+
+
+class CreditNotesStream(ChargebeeStream):
+
+    name = "credit_notes"
+    path = "/credit_notes"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].credit_note"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("subscription_id", th.StringType),
+        th.Property("reference_invoice_id", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("reason_code", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("date", th.IntegerType),
+        th.Property("price_type", th.StringType),
+        th.Property("exchange_rate", th.NumberType),
+        th.Property("total", th.NumberType),
+        th.Property("amount_allocated", th.NumberType),
+        th.Property("amount_refunded", th.NumberType),
+        th.Property("amount_available", th.NumberType),
+        th.Property("generated_at", th.IntegerType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("channel", th.StringType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("object", th.StringType),
+        th.Property("create_reason_code", th.StringType),
+        th.Property("currency_code", th.StringType),
+        th.Property("round_off_amount", th.NumberType),
+        th.Property("fractional_correction", th.NumberType),
+        th.Property("is_digital", th.BooleanType),
+        th.Property("base_currency_code", th.StringType),
+        th.Property("sub_total", th.NumberType),
+        th.Property("line_items", th.ArrayType(th.ObjectType())),
+        th.Property("taxes", th.ArrayType(th.ObjectType())),
+        th.Property("line_item_taxes", th.ArrayType(th.ObjectType())),
+        th.Property("line_item_discounts", th.ArrayType(th.ObjectType())),
+        th.Property("linked_refunds", th.ArrayType(th.ObjectType())),
+        th.Property("allocations", th.ArrayType(th.ObjectType())),
+        th.Property("billing_address", th.ObjectType()),
+    ).to_dict()
+
+
+class OrdersStream(ChargebeeStream):
+
+    name = "orders"
+    path = "/orders"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].order"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("document_number", th.StringType),
+        th.Property("invoice_id", th.StringType),
+        th.Property("subscription_id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("cancellation_reason", th.StringType),
+        th.Property("payment_status", th.StringType),
+        th.Property("order_type", th.StringType),
+        th.Property("price_type", th.StringType),
+        th.Property("reference_id", th.StringType),
+        th.Property("fulfillment_status", th.StringType),
+        th.Property("order_date", th.DateTimeType),
+        th.Property("shipping_date", th.DateTimeType),
+        th.Property("note", th.StringType),
+        th.Property("tracking_id", th.StringType),
+        th.Property("batch_id", th.StringType),
+        th.Property("created_by", th.StringType),
+        th.Property("shipment_carrier", th.StringType),
+        th.Property("invoice_round_off_amount", th.IntegerType),
+        th.Property("tax", th.IntegerType),
+        th.Property("amount_paid", th.IntegerType),
+        th.Property("amount_adjusted", th.IntegerType),
+        th.Property("refundable_credits_issued", th.IntegerType),
+        th.Property("refundable_credits", th.IntegerType),
+        th.Property("rounding_adjustement", th.IntegerType),
+        th.Property("paid_on", th.DateTimeType),
+        th.Property("shipping_cut_off_date", th.DateTimeType),
+        th.Property("created_at", th.DateTimeType),
+        th.Property("status_update_at", th.DateTimeType),
+        th.Property("delivered_at", th.DateTimeType),
+        th.Property("shipped_at", th.DateTimeType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("cancelled_at", th.DateTimeType),
+        th.Property("discount", th.IntegerType),
+        th.Property("sub_total", th.IntegerType),
+        th.Property("total", th.IntegerType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("currency_code", th.StringType),
+        th.Property("is_gifted", th.BooleanType),
+        th.Property("gift_note", th.StringType),
+        th.Property("gift_id", th.StringType),
+        th.Property("order_line_items", th.ArrayType(th.ObjectType())),
+        th.Property("shipping_address", th.ObjectType()),
+        th.Property("billing_address", th.ObjectType()),
+        th.Property("line_item_taxes", th.ArrayType(th.ObjectType())),
+        th.Property("line_item_discounts", th.ArrayType(th.ObjectType())),
+        th.Property("linked_credit_notes", th.ArrayType(th.ObjectType())),
+    ).to_dict()
