@@ -8,6 +8,7 @@ from typing import Any, Callable, Iterable
 import requests
 from singer_sdk.authenticators import BasicAuthenticator
 from singer_sdk.helpers.jsonpath import extract_jsonpath
+from singer_sdk.helpers._typing import TypeConformanceLevel
 from singer_sdk.pagination import BaseAPIPaginator  # noqa: TCH002
 from singer_sdk.streams import RESTStream
 
@@ -24,6 +25,7 @@ class ChargebeeStream(RESTStream):
 
     records_jsonpath = "$.list[*]"
     next_page_token_jsonpath = "$.next_offset"  # noqa: S105
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
 
     @property
     def authenticator(self) -> BasicAuthenticator:
