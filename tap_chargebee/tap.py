@@ -58,7 +58,9 @@ class TapChargebee(Tap):
             streams.CouponsStream(self),
             streams.CustomerStream(self),
             streams.EventsStream(self),
+            streams.GiftsStream(self),
             streams.OrdersStream(self),
+            streams.PaymentSourcesStream(self),
             streams.SubscriptionsStream(self),
         ]
 

@@ -313,3 +313,49 @@ class OrdersStream(ChargebeeStream):
         th.Property("line_item_discounts", th.ArrayType(th.ObjectType())),
         th.Property("linked_credit_notes", th.ArrayType(th.ObjectType())),
     ).to_dict()
+
+
+class PaymentSourcesStream(ChargebeeStream):
+
+    name = "payment_sources"
+    path = "/payment_sources"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].payment_source"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("object", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("reference_id", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("gateway", th.StringType),
+        th.Property("gateway_account_id", th.StringType),
+        th.Property("created_at", th.IntegerType),
+        th.Property("card", th.ObjectType()),
+        th.Property("business_entity_id", th.StringType),
+    ).to_dict()
+
+
+class GiftsStream(ChargebeeStream):
+
+    name = "gifts"
+    path = "/gifts"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].gift"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("scheduled_at", th.DateTimeType),
+        th.Property("auto_claim", th.BooleanType),
+        th.Property("claim_expiry_date", th.DateTimeType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("gifter", th.ObjectType()),
+        th.Property("gift_receiver", th.ObjectType()),
+        th.Property("gift_timelines", th.ObjectType()),
+    ).to_dict()
