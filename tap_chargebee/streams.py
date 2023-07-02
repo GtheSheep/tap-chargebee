@@ -359,3 +359,98 @@ class GiftsStream(ChargebeeStream):
         th.Property("gift_receiver", th.ObjectType()),
         th.Property("gift_timelines", th.ObjectType()),
     ).to_dict()
+
+
+class ItemsStream(ChargebeeStream):
+
+    name = "items"
+    path = "/items"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].item"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("channel", th.StringType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("item_family_id", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("is_shippable", th.BooleanType),
+        th.Property("is_giftable", th.BooleanType),
+        th.Property("redirect_url", th.StringType),
+        th.Property("enabled_for_checkout", th.BooleanType),
+        th.Property("enabled_in_portal", th.BooleanType),
+        th.Property("included_in_mrr", th.BooleanType),
+        th.Property("item_applicability", th.StringType),
+        th.Property("gift_claim_redirect_url", th.StringType),
+        th.Property("unit", th.StringType),
+        th.Property("metered", th.BooleanType),
+        th.Property("usage_calculation", th.StringType),
+        th.Property("metadata", th.ObjectType()),
+        th.Property("custom_fields", th.ObjectType()),
+        th.Property("applicable_items", th.ArrayType(th.ObjectType())),
+    ).to_dict()
+
+
+class ItemPricesStream(ChargebeeStream):
+
+    name = "item_prices"
+    path = "/item_prices"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].item_price"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("item_family_id", th.StringType),
+        th.Property("item_id", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("external_name", th.StringType),
+        th.Property("pricing_model", th.StringType),
+        th.Property("price", th.IntegerType),
+        th.Property("period", th.IntegerType),
+        th.Property("currency_code", th.StringType),
+        th.Property("period_unit", th.StringType),
+        th.Property("trial_period", th.IntegerType),
+        th.Property("trial_period_unit", th.StringType),
+        th.Property("shipping_period_unit", th.StringType),
+        th.Property("billing_cycles", th.IntegerType),
+        th.Property("free_quantity", th.IntegerType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("created_at", th.IntegerType),
+        th.Property("invoice_notes", th.StringType),
+        th.Property("is_taxable", th.BooleanType),
+        th.Property("metadata", th.ObjectType()),
+        th.Property("item_type", th.StringType),
+        th.Property("show_description_in_invoices", th.BooleanType),
+        th.Property("show_description_in_quotes", th.BooleanType),
+        th.Property("cf_product_code", th.StringType),
+        th.Property("channel", th.StringType),
+        th.Property("tiers", th.ArrayType(th.ObjectType())),
+        th.Property("tax_detail", th.ObjectType()),
+        th.Property("accounting_detail", th.ObjectType()),
+    ).to_dict()
+
+
+class ItemFamiliesStream(ChargebeeStream):
+
+    name = "item_families"
+    path = "/item_families"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.list[*].item_family"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("object", th.StringType),
+        th.Property("channel", th.StringType),
+    ).to_dict()
