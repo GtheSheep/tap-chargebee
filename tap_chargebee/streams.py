@@ -454,3 +454,60 @@ class ItemFamiliesStream(ChargebeeStream):
         th.Property("object", th.StringType),
         th.Property("channel", th.StringType),
     ).to_dict()
+
+
+class InvoicesStream(ChargebeeStream):
+
+    name = "invoices"
+    path = "/invoices"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    records_jsonpath = "$.list[*].invoice"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("subscription_id", th.StringType),
+        th.Property("recurring", th.BooleanType),
+        th.Property("status", th.StringType),
+        th.Property("price_type", th.StringType),
+        th.Property("date", th.IntegerType),
+        th.Property("due_date", th.IntegerType),
+        th.Property("net_term_days", th.IntegerType),
+        th.Property("exchange_rate", th.NumberType),
+        th.Property("total", th.NumberType),
+        th.Property("amount_paid", th.NumberType),
+        th.Property("amount_adjusted", th.NumberType),
+        th.Property("write_off_amount", th.NumberType),
+        th.Property("credits_applied", th.NumberType),
+        th.Property("amount_due", th.NumberType),
+        th.Property("paid_at", th.IntegerType),
+        th.Property("updated_at", th.IntegerType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("object", th.StringType),
+        th.Property("first_invoice", th.BooleanType),
+        th.Property("amount_to_collect", th.NumberType),
+        th.Property("round_off_amount", th.NumberType),
+        th.Property("new_sales_amount", th.NumberType),
+        th.Property("has_advance_charges", th.BooleanType),
+        th.Property("currency_code", th.StringType),
+        th.Property("base_currency_code", th.StringType),
+        th.Property("generated_at", th.IntegerType),
+        th.Property("is_gifted", th.BooleanType),
+        th.Property("term_finalized", th.BooleanType),
+        th.Property("channel", th.StringType),
+        th.Property("is_digital", th.BooleanType),
+        th.Property("tax", th.NumberType),
+        th.Property("line_items", th.ArrayType(th.ObjectType())),
+        th.Property("taxes", th.ArrayType(th.ObjectType())),
+        th.Property("line_item_taxes", th.ArrayType(th.ObjectType())),
+        th.Property("sub_total", th.NumberType),
+        th.Property("linked_payments", th.ArrayType(th.ObjectType())),
+        th.Property("applied_credits", th.ArrayType(th.ObjectType())),
+        th.Property("adjustment_credit_notes", th.ArrayType(th.ObjectType())),
+        th.Property("issued_credit_notes", th.ArrayType(th.ObjectType())),
+        th.Property("linked_orders", th.ArrayType(th.ObjectType())),
+        th.Property("dunning_attempts", th.ArrayType(th.ObjectType())),
+        th.Property("billing_address", th.ObjectType()),
+        th.Property("business_entity_id", th.StringType),
+    ).to_dict()
