@@ -511,3 +511,114 @@ class InvoicesStream(ChargebeeStream):
         th.Property("billing_address", th.ObjectType()),
         th.Property("business_entity_id", th.StringType),
     ).to_dict()
+
+
+class PromotionalCreditsStream(ChargebeeStream):
+
+    name = "promotional_credits"
+    path = "/promotional_credits"
+    primary_keys = ["id"]
+    replication_key = "created_at"
+    records_jsonpath = "$.list[*].promotional_credit"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("amount", th.StringType),
+        th.Property("currency_code", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("credit_type", th.StringType),
+        th.Property("reference", th.StringType),
+        th.Property("closing_balance", th.IntegerType),
+        th.Property("done_by", th.StringType),
+        th.Property("created_at", th.DateTimeType),
+    ).to_dict()
+
+
+class VirtualBankAccountsStream(ChargebeeStream):
+
+    name = "virtual_bank_accounts"
+    path = "/virtual_bank_accounts"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    records_jsonpath = "$.list[*].virtual_bank_account"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("email", th.StringType),
+        th.Property("bank_name", th.StringType),
+        th.Property("account_number", th.StringType),
+        th.Property("routing_number", th.StringType),
+        th.Property("swift_code", th.StringType),
+        th.Property("gateway", th.StringType),
+        th.Property("gateway_account_id", th.StringType),
+        th.Property("resource_version", th.IntegerType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("created_at", th.DateTimeType),
+        th.Property("reference_id", th.StringType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("object", th.StringType),
+    ).to_dict()
+
+
+class UnbilledChargesStream(ChargebeeStream):
+
+    name = "unbilled_charges"
+    path = "/unbilled_charges"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    records_jsonpath = "$.list[*].unbilled_charge"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("subscription_id", th.StringType),
+        th.Property("date_from", th.DateTimeType),
+        th.Property("date_to", th.DateTimeType),
+        th.Property("unit_amount", th.IntegerType),
+        th.Property("pricing_model", th.StringType),
+        th.Property("quantity", th.IntegerType),
+        th.Property("amount", th.IntegerType),
+        th.Property("currency_code", th.StringType),
+        th.Property("discount_amount", th.IntegerType),
+        th.Property("description", th.IntegerType),
+        th.Property("entity_type", th.IntegerType),
+        th.Property("entity_id", th.IntegerType),
+        th.Property("is_voided", th.BooleanType),
+        th.Property("voided_at", th.DateTimeType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("tiers", th.ArrayType(th.ObjectType())),
+        th.Property("unit_amount_in_decimal", th.StringType),
+        th.Property("quantity_in_decimal", th.StringType),
+        th.Property("amount_in_decimal", th.StringType),
+    ).to_dict()
+
+
+class InvoicedUnbilledChargesStream(ChargebeeStream):
+
+    name = "invoiced_unbilled_charges"
+    path = "/unbilled_charges/invoiced"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    records_jsonpath = "$.list[*].unbilled_charge"
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("customer_id", th.StringType),
+        th.Property("subscription_id", th.StringType),
+        th.Property("date_from", th.DateTimeType),
+        th.Property("date_to", th.DateTimeType),
+        th.Property("unit_amount", th.IntegerType),
+        th.Property("pricing_model", th.StringType),
+        th.Property("quantity", th.IntegerType),
+        th.Property("amount", th.IntegerType),
+        th.Property("currency_code", th.StringType),
+        th.Property("discount_amount", th.IntegerType),
+        th.Property("description", th.IntegerType),
+        th.Property("entity_type", th.IntegerType),
+        th.Property("entity_id", th.IntegerType),
+        th.Property("is_voided", th.BooleanType),
+        th.Property("voided_at", th.DateTimeType),
+        th.Property("deleted", th.BooleanType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("tiers", th.ArrayType(th.ObjectType())),
+    ).to_dict()

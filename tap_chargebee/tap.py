@@ -59,13 +59,17 @@ class TapChargebee(Tap):
             streams.CustomerStream(self),
             streams.EventsStream(self),
             streams.GiftsStream(self),
+            streams.InvoicedUnbilledChargesStream(self),
             streams.InvoicesStream(self),
             streams.ItemsStream(self),
             streams.ItemFamiliesStream(self),
             streams.ItemPricesStream(self),
             streams.OrdersStream(self),
             streams.PaymentSourcesStream(self),
+            streams.PromotionalCreditsStream(self),
             streams.SubscriptionsStream(self),
+            streams.UnbilledChargesStream(self),
+            streams.VirtualBankAccountsStream(self),
         ]
 
 
