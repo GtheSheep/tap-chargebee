@@ -122,7 +122,7 @@ class TransactionStream(ChargebeeStream):
     name = "transactions"
     path = "/transactions"
     primary_keys = ["id"]
-    replication_key = "updated_at"
+    # replication_key = "updated_at"
     records_jsonpath = "$.list[*].transaction"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
