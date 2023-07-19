@@ -4,9 +4,9 @@
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
-<!--
+## Gotchas
 
-Developer TODO: Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
+* Transactions - If not `updated_at` is found, we use the `date` field.
 
 ## Installation
 
@@ -21,8 +21,6 @@ Install from GitHub:
 ```bash
 pipx install git+https://github.com/ORG_NAME/tap-chargebee.git@main
 ```
-
--->
 
 ## Configuration
 

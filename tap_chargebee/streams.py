@@ -122,7 +122,7 @@ class TransactionStream(ChargebeeStream):
     name = "transactions"
     path = "/transactions"
     primary_keys = ["id"]
-    # replication_key = "updated_at"
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].transaction"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -152,6 +152,12 @@ class TransactionStream(ChargebeeStream):
         th.Property("business_entity_id", th.StringType),
         th.Property("payment_method_details", th.ObjectType()),
     ).to_dict()
+
+    def post_process(row: dict, context: dict | None) → dict | None:
+        if row.get("updated_at") is None:
+            row["updated_at"] = row["date"]
+        return row
+        
 
 
 class BusinessEntitiesStream(ChargebeeStream):
