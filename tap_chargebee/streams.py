@@ -14,7 +14,7 @@ class SubscriptionsStream(ChargebeeStream):
     name = "subscriptions"
     path = "/subscriptions"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].subscription"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -85,7 +85,7 @@ class CustomerStream(ChargebeeStream):
     name = "customers"
     path = "/customers"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].customer"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -164,7 +164,7 @@ class BusinessEntitiesStream(ChargebeeStream):
     name = "business_entities"
     path = "/business_entities"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].business_entity"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -184,7 +184,7 @@ class CouponsStream(ChargebeeStream):
     name = "coupons"
     path = "/coupons"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].coupon"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -220,7 +220,7 @@ class CreditNotesStream(ChargebeeStream):
     name = "credit_notes"
     path = "/credit_notes"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].credit_note"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -265,7 +265,7 @@ class OrdersStream(ChargebeeStream):
     name = "orders"
     path = "/orders"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].order"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -325,7 +325,7 @@ class PaymentSourcesStream(ChargebeeStream):
     name = "payment_sources"
     path = "/payment_sources"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].payment_source"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -350,7 +350,7 @@ class GiftsStream(ChargebeeStream):
     name = "gifts"
     path = "/gifts"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].gift"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -371,7 +371,7 @@ class ItemsStream(ChargebeeStream):
     name = "items"
     path = "/items"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].item"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -405,7 +405,7 @@ class ItemPricesStream(ChargebeeStream):
     name = "item_prices"
     path = "/item_prices"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].item_price"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -447,7 +447,7 @@ class ItemFamiliesStream(ChargebeeStream):
     name = "item_families"
     path = "/item_families"
     primary_keys = ["id"]
-    replication_key = None
+    replication_key = "updated_at"
     records_jsonpath = "$.list[*].item_family"
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
