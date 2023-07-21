@@ -153,7 +153,7 @@ class TransactionStream(ChargebeeStream):
         th.Property("payment_method_details", th.ObjectType()),
     ).to_dict()
 
-    def post_process(row: dict, context: dict | None) -> dict | None:
+    def post_process(self, row: dict, context: dict | None) -> dict | None:
         if row.get("updated_at") is None:
             row["updated_at"] = row["date"]
         return row
