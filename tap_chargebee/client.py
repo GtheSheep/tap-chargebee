@@ -88,5 +88,17 @@ class ChargebeeStream(RESTStream):
         if next_page_token:
             params["offset"] = next_page_token
         if self.replication_key:
+            try:
+                start_time = self.get_starting_timestamp(context)
+                start_time_int = int(start_time.timestamp())
+            except:
+                start_time = self.get_starting_replication_key_value(context)
+                try:
+                    start_time_int = int(start_time)
+                except:
+                    import datetime
+                    start_time_int = int(datetime.datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%SZ").timestamp())
+            if start_time_int:
+                params[self.replication_key + "[after]"] = str(start_time_int)
             params["sort_by"] = self.replication_key
         return params
